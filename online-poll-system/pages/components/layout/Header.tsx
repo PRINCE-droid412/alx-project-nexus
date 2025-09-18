@@ -7,9 +7,9 @@ const Header: React.FC = () => {
       <div className="flex items-center justify-between w-full">
         <h2 className="text-xl md:text-4xl font-semibold">Online Poll<span className="text-[#E2D609]">App</span></h2>
          <nav>
-        {/* ✅ Replacing with your reusable Button */}
-        <Link href="/signin">
-          <Button title="Sign In" action={() => {}} />
+        {/* View Poll Results button */}
+        <Link href="/demo">
+          <Button title="View Poll Results" action={() => {}} />
         </Link>
       </nav>
       </div>

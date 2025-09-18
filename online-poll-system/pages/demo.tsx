@@ -1,7 +1,6 @@
-// pages/demo.tsx
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/store/store";
-import { addPoll, vote } from "../features/pollSlice";
+import { addPoll, vote, deletePoll } from "../features/pollSlice";
 import PollResultsChart from "./components/poll/PollResultsChart";
 
 export default function Demo() {
@@ -10,7 +9,7 @@ export default function Demo() {
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Poll Result Outcome</h1>
+      <h1 className="text-2xl font-bold mb-4">Poll Overview</h1>
 
       {/* Button to add a poll */}
       <button
@@ -33,22 +32,52 @@ export default function Demo() {
       </button>
 
       {polls.map((poll) => (
-        <div key={poll.id} className="mt-6 p-4 border rounded">
-          <h2 className="font-semibold mb-2">{poll.question}</h2>
-          {poll.options.map((opt) => (
-            <button
-              key={opt.id}
-              className="mr-2 mt-2 px-3 py-1 bg-green-500 text-white rounded"
-              onClick={() => dispatch(vote({ pollId: poll.id, optionId: opt.id }))}
-            >
-              {opt.text} ({opt.votes})
-            </button>
-          ))}
+  <div key={poll.id} className="mt-6 p-4 border rounded">
+    <h2 className="font-semibold mb-2">{poll.question}</h2>
 
-          {/* Chart updates in real-time */}
-          <PollResultsChart pollId={poll.id} options={poll.options} />
-        </div>
-      ))}
+    {/* Poll options */}
+    {poll.options.map((opt) => (
+      <button
+        key={opt.id}
+        className="mr-2 mt-2 px-3 py-1 bg-green-500 text-white rounded"
+        onClick={() => dispatch(vote({ pollId: poll.id, optionId: opt.id }))}
+      >
+        {opt.text} ({opt.votes})
+      </button>
+    ))}
+
+    {/* Chart updates in real-time */}
+    <PollResultsChart pollId={poll.id} />
+
+    {/* Delete Poll Button */}
+    <button
+      className="mt-4 px-3 py-1 bg-red-600 text-white rounded"
+      onClick={() => dispatch(deletePoll(poll.id))}
+    >
+      Delete Poll
+    </button>
+
+    {/* Share Poll Button */}
+          <button
+            className="mt-4 ml-2 px-3 py-1 bg-blue-600 text-white rounded"
+            onClick={() => {
+              const shareData = {
+                title: "Vote in this poll!",
+                text: `Check out this poll: ${poll.question}`,
+                url: `${window.location.origin}/demo?pollId=${poll.id}`,
+              };
+
+              if (navigator.share) {
+                navigator.share(shareData).catch(console.error);
+              } else {
+                alert("Sharing is not supported on this browser.");
+              }
+            }}
+          >
+            Share Poll
+          </button>
+  </div>
+))}
     </div>
   );
 }

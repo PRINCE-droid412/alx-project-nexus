@@ -18,5 +18,5 @@ export interface Poll {
 
 export interface PollResultsChartProps {
   pollId: string;
-  options: PollOption[]; // ✅ required
+  options: PollOption[]; //  required
 }

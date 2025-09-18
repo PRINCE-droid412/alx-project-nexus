@@ -7,25 +7,18 @@ interface PollResultsChartProps {
   pollId: string;
 }
 
-interface PollOption {
-  id: string;
-  text: string;
-  votes: number;
-}
-
-interface PollResultsChartProps {
-  options: PollOption[];
-}
-
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
 export default function PollResultsChart({ pollId }: PollResultsChartProps) {
-    // Select poll by ID from Redux store
-    const poll = useSelector((state:RootState) =>
+  // Select poll by ID from Redux store
+  const poll = useSelector((state: RootState) =>
     state.polls.polls.find((p) => p.id === pollId)
-    );
+  );
 
-    if (!poll) return <p>No poll found</p>;
+  if (!poll) return <p>No poll found</p>;
+
+  // ✅ Debugging: check if options update after voting
+  console.log("Poll options received by chart:", poll.options);
 
   return (
     <div className="flex flex-col lg:flex-row gap-8 mt-8">

@@ -1,6 +1,8 @@
 // features/pollSlice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Poll } from "../interfaces/";
+import { Poll as PollInterface } from "../interfaces/";
+
+
 
 
 interface PollOption {
@@ -9,14 +11,14 @@ interface PollOption {
   votes: number;
 }
 
-interface Poll {
+interface LocalPoll {
   id: string;
   question: string;
   options: PollOption[];
 }
 
 interface PollState {
-  polls: Poll[];
+  polls: LocalPoll[];
 }
 
 const initialState: PollState = {
@@ -27,18 +29,31 @@ const pollSlice = createSlice({
   name: "polls",
   initialState,
   reducers: {
+    // Add Poll
     addPoll: (state, action: PayloadAction<Poll>) => {
       state.polls.push(action.payload);
     },
-    vote: (state, action: PayloadAction<{ pollId: string; optionId: string }>) => {
+
+    // Vote Reducer
+    vote: (
+      state,
+      action: PayloadAction<{ pollId: string; optionId: string }>
+    ) => {
       const poll = state.polls.find((p) => p.id === action.payload.pollId);
       if (poll) {
-        const option = poll.options.find((o) => o.id === action.payload.optionId);
-        if (option) option.votes += 1;
+        const option = poll.options.find(
+          (o) => o.id === action.payload.optionId
+        );
+        if (option) option.votes += 1; // Increment vote count
       }
+    },
+
+    // Delete Poll Reducer
+    deletePoll: (state, action: PayloadAction<string>) => {
+      state.polls = state.polls.filter((p) => p.id !== action.payload);
     },
   },
 });
 
-export const { addPoll, vote } = pollSlice.actions;
+export const { addPoll, vote, deletePoll } = pollSlice.actions;
 export default pollSlice.reducer;
