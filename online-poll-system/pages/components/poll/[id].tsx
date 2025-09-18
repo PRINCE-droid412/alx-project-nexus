@@ -1,16 +1,19 @@
-// pages/poll/[id].tsx
 import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/store/store";
-
+import { vote } from "@/features/pollSlice"; 
 import { useState } from "react";
+import PollResultsChart from "../../components/poll/PollResultsChart";  
 
 export default function PollDetail() {
   const router = useRouter();
   const { id } = router.query;
 
+  const dispatch = useDispatch();
+
+  // Find poll in state
   const poll = useSelector((state: RootState) =>
-    state.polls.find((p) => p.id === id)
+    state.polls.polls.find((p) => p.id === id)
   );
 
   const [copied, setCopied] = useState(false);
@@ -31,14 +34,31 @@ export default function PollDetail() {
     <div className="max-w-2xl mx-auto p-6">
       <h1 className="text-2xl font-bold mb-4">{poll.question}</h1>
 
-      <ul className="mb-6 list-disc pl-5">
+      {/* Poll options with voting */}
+      <div className="mb-6">
         {poll.options.map((opt) => (
-          <li key={opt.id}>{opt.text}</li>
+          <button
+            key={opt.id}
+            disabled={!poll.active}
+            onClick={() =>
+              dispatch(vote({ pollId: poll.id, optionId: opt.id }))
+            }
+            className={`mr-2 mt-2 px-3 py-1 rounded ${
+              poll.active
+                ? "bg-green-500 text-white"
+                : "bg-gray-300 text-gray-600 cursor-not-allowed"
+            }`}
+          >
+            {opt.text} ({opt.votes})
+          </button>
         ))}
-      </ul>
+      </div>
+
+      {/* Real-time chart */}
+      <PollResultsChart pollId={poll.id} />
 
       {/* Sharing options */}
-      <div className="space-y-3">
+      <div className="space-y-3 mt-6">
         <button
           onClick={copyToClipboard}
           className="px-4 py-2 bg-gray-800 text-white rounded"
