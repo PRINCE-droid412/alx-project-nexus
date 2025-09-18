@@ -2,16 +2,17 @@
 
 ## Project Overview
 
-This **Online Poll System** is a comprehensive web application built with **Next.js, TypeScript, Redux, and Tailwind CSS**, where users can create polls, vote, and view live results. The system emphasizes **real-time updates**, **dynamic data visualizations**, and a smooth **user experience**.
+This **Online Poll System** is a comprehensive web application built with **Next.js, TypeScript, Redux, and Tailwind CSS**, where users can create polls, vote, share and view live results. The system emphasizes **real-time updates**, **dynamic data visualizations**, and a smooth **user experience**.
 
 ---
 
 ## 🚀 Features
 - ✅ **Poll Creation & Voting** – Create polls with multiple options and vote on active polls.
-- 🔄 **Real-Time Results** – Results update live as votes are cast, no refresh needed.
+- 🔄 **Real-Time Results** – Results update live as votes are cast.
 - 📊 **Dynamic Visualizations** – Charts display poll results in a clear and engaging way.
 - 📱 **Responsive UI** – Optimized for mobile, tablet, and desktop.
 - 🛡️ **Form Validation** – User-friendly error handling for invalid inputs.
+- 🔄 **Share active Poll with others** - users can vote on active polls through shared links with others 
 
 ---
 
@@ -25,29 +26,17 @@ This **Online Poll System** is a comprehensive web application built with **Next
 ---
 
 
-## 🧑‍💻 Git Commit Workflow
+# 📊 Improvements
 
-feat: – New feature (e.g., feat: implement real-time results display)
+🌐 Deployed with Vercel.
 
-fix: – Bug fix (e.g., fix: resolve state update bugs in Redux)
+📤 Shareable poll links with audience.
 
-style: – UI changes and styling
-docs: – Documentation updates
-
-
-# 📊 Future Improvements
-
-🔐 User authentication (sign up / login).
-
-🌐 Deploy with Vercel.
-
-📤 Shareable poll links with unique IDs.
-
-📈 Advanced analytics dashboard for admins.
+📈 Added charts for visualizing poll results.
 
 ## 👨‍💻 Author
 
-### Developed by **Prince Takyi Amaoko ✨**
+### Developed by **Prince Takyi Amoako ✨**
 
 [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/PRINCE-droid412)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/prince-takyi-amoako-33ba02256/)
@@ -56,18 +45,15 @@ docs: – Documentation updates
  
 ---
 
-## **Step 3: Scaffolding the Project**
-Run this in your terminal:
-
+# **Project Presentation**
+**Online Poll system Wireframe**:
+![alt text](wireframe.png)
 
 ---
+## **Product Presentation Slides link**
+https://docs.google.com/presentation/d/1y1rJah3VV5XI-ShBQLhimaqKp_IVYCLxnQQ0QVP6mRc/edit?usp=sharing
 
-## ⚙️ Installation & Setup
+## **Product Protoype Design link (Online Poll system)**
+https://www.figma.com/design/3taaKc4MvGos2wZxUyXN0G/Untitled?node-id=0-1&t=yHfFNHnhjNejHPEd-1
 
-1. **Clone the Repository**
-```bash
-git clone https://github.com/your-username/online-poll-system.git
-cd online-poll-system
-npm install
-npm run dev
 
