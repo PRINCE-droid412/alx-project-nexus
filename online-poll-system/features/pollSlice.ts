@@ -9,16 +9,17 @@ interface PollOption {
   id: string;
   text: string;
   votes: number;
-}
+} 
 
-interface LocalPoll {
+interface Poll {
   id: string;
   question: string;
   options: PollOption[];
+  active?: boolean; // optional if you want polls to be active/inactive
 }
 
 interface PollState {
-  polls: LocalPoll[];
+  polls: Poll[];
 }
 
 const initialState: PollState = {
